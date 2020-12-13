@@ -1,0 +1,51 @@
+version: '3.8'
+services:
+  plex:
+    image: plexinc/pms-docker
+    ports:
+      - 32400:32400/tcp
+      - 3005:3005/tcp
+      - 8324:8324/tcp
+      - 32469:32469/tcp
+      - 1900:1900/udp
+      - 32410:32410/udp
+      - 32412:32412/udp
+      - 32413:32413/udp
+      - 32414:32414/udp
+    deploy:
+      placement:
+        constraints:
+          - "node.hostname==gaby"
+      replicas: 1
+      restart_policy:
+        max_attempts: 3
+    environment:
+      - TZ="America/Fort_Wayne"
+      - PLEX_CLAIM=claim-he1evRorevC1cRsKu5Pw
+      - PLEX_UID=1001
+      - PLEX_GID=1005
+      - VERSION=latest
+    volumes:
+      - /docker-media/services/plex-tautulli/
+      - /docker/plex-tautulli/pms-docker/data/config:/config
+      - /docker/plex-tautulli/pms-docker/data/transcode:/transcode
+      - /docker/plex-tautulli/pms-docker/data/data:/data
+      - /docker-media:/media/1tb
+      - /media/c-4tb/Stuffs:/media/c-4tb-stuffs
+      - /media/d-4tb/media:/media/d-4tb-media
+  tautulli:
+    container_name: plex-tautulli
+    deploy:
+      replicas: 1
+      restart_policy:
+        max_attempts: 3
+    volumes:
+      - /docker/plex-tautulli/tautulli/data/config:/config
+      - /docker/plex-tautulli/pms-docker/data/config/Library/Application Support/Plex Media Server/Logs:/plex_logs:ro
+    environment:
+      - PUID=1001
+      - PGID=1005
+    ports:
+      - 32401:8181
+    image: tautulli/tautulli
+    restart: unless-stopped
