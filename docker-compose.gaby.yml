@@ -15,14 +15,12 @@ services:
       - /docker/plex-tautulli/pms-docker/data/config:/config
       - /docker/plex-tautulli/pms-docker/data/transcode:/transcode
       - /docker/plex-tautulli/pms-docker/data/data:/data
-      - /docker-media:/media/1tb
-      - /media/c-4tb/Stuffs:/media/c-4tb-stuffs
-      - /media/d-4tb/media:/media/d-4tb-media
+      - /media/swallot-stuffs:/media/swallot-stuffs
   tautulli:
     container_name: plex-tautulli
     volumes:
-      - /home/docker_user/docker/tautulli/data/config:/config
-      - /home/docker_user/docker/pms-docker/data/config/Library/Application Support/Plex Media Server/Logs:/plex_logs:ro
+      - /docker/tautulli/data/config:/config
+      - /docker/pms-docker/data/config/Library/Application Support/Plex Media Server/Logs:/plex_logs:ro
     environment:
       - PUID=1001
       - PGID=1005
