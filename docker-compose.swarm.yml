@@ -36,6 +36,9 @@ services:
   tautulli:
     container_name: plex-tautulli
     deploy:
+      placement:
+        constraints:
+          - "node.hostname==gaby"
       replicas: 1
       restart_policy:
         max_attempts: 3
