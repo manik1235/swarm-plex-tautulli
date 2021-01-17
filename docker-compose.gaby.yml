@@ -1,0 +1,32 @@
+version: '3.7'
+services:
+  plex:
+    container_name: plex
+    image: plexinc/pms-docker
+    restart: unless-stopped
+    environment:
+      - TZ="America/Fort_Wayne"
+      - PLEX_CLAIM=claim-he1evRorevC1cRsKu5Pw
+      - PLEX_UID=1001
+      - PLEX_GID=1005
+      - VERSION=latest
+    network_mode: host
+    volumes:
+      - /docker/plex-tautulli/pms-docker/data/config:/config
+      - /docker/plex-tautulli/pms-docker/data/transcode:/transcode
+      - /docker/plex-tautulli/pms-docker/data/data:/data
+      - /docker-media:/media/1tb
+      - /media/c-4tb/Stuffs:/media/c-4tb-stuffs
+      - /media/d-4tb/media:/media/d-4tb-media
+  tautulli:
+    container_name: plex-tautulli
+    volumes:
+      - /home/docker_user/docker/tautulli/data/config:/config
+      - /home/docker_user/docker/pms-docker/data/config/Library/Application Support/Plex Media Server/Logs:/plex_logs:ro
+    environment:
+      - PUID=1001
+      - PGID=1005
+    ports:
+      - "32500:8181"
+    image: tautulli/tautulli
+    restart: unless-stopped
