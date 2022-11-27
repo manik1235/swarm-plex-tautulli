@@ -5,6 +5,7 @@ services:
     restart: unless-stopped
     environment:
       - TZ="America/Fort_Wayne"
+      - PLEX_CLAIM=claim-oChWie8HAT563jp-qqXD
       - PLEX_UID=1001
       - PLEX_GID=1001
       - VERSION=latest
