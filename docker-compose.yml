@@ -17,14 +17,14 @@ services:
       - /media/giratina/stuffs:/media/host-media
     restart: unless-stopped
 
-  tautulli:
-    image: tautulli/tautulli
-    volumes:
-      - ./data-tautulli/config:/config
-      - ./data-tautulli/config/Library/Application Support/Plex Media Server/Logs:/plex_logs:ro
-    environment:
-      - PUID=1001
-      - PGID=1001
-    ports:
-      - "32500:8181"
-    restart: unless-stopped
+      #tautulli:
+      #  image: tautulli/tautulli
+      #  volumes:
+      #    - ./data-tautulli/config:/config
+      #    - ./data-tautulli/config/Library/Application Support/Plex Media Server/Logs:/plex_logs:ro
+      #  environment:
+      #    - PUID=1001
+      #    - PGID=1001
+      #  ports:
+      #    - "32500:8181"
+      #  restart: unless-stopped
