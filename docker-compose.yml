@@ -1,14 +1,14 @@
 version: "3.7"
 services:
   plex:
-    image: plexinc/pms-docker
+    image: lscr.io/linuxserver/plex:latest
     restart: unless-stopped
     environment:
       - TZ="America/Fort_Wayne"
-      - PLEX_CLAIM=claim-oChWie8HAT563jp-qqXD
-      - PLEX_UID=1001
-      - PLEX_GID=1002
-      - VERSION=latest
+      - PUID=1001
+      - PGID=1002
+      - VERSION=docker
+        #- PLEX_CLAIM=claim-TtnxbJGoppxaTNgT3HYz
     network_mode: host
     volumes:
       - ./data-plex/config:/config
